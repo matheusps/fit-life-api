@@ -2,7 +2,7 @@ import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import { APP_SECRET } from '../utils'
 
-const signup = async (parent, args, context, info) => {
+const signup = async (parent: any, args: any, context: any, info: any) => {
   const password = await bcrypt.hash(args.password, 10)
   const user = await context.prisma.createUser({ ...args, password })
   const token = jwt.sign({ userId: user.id }, APP_SECRET)
@@ -13,7 +13,7 @@ const signup = async (parent, args, context, info) => {
   }
 }
 
-const login = async (parent, args, context, info) => {
+const login = async (parent: any, args: any, context: any, info: any) => {
   const user = await context.prisma.user({ email: args.email })
   if (!user) throw new Error('No such user found! ☹️')
 
