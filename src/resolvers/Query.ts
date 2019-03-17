@@ -2,7 +2,7 @@ const info = () => {
   return 'Just awessome API 👽'
 }
 
-const users = (parent: any, args: any, context: any) => {
+const users = (parent, args, context) => {
   return context.prisma.users()
 }
 
