@@ -1,11 +1,13 @@
 type Query {
   info: String!
   users: [User!]!
+  posts: [Post!]!
 }
 
 type Mutation {
   signup(name: String!, email: String!, password: String!): AuthPayload
   login(email: String!, password: String!): AuthPayload
+  createPost(content: String!): Post!
 }
 
 type AuthPayload {
@@ -18,4 +20,11 @@ type User {
   name: String!
   email: String!
   password: String!
+  posts: [Post!]!
+}
+
+type Post {
+  id: ID!
+  content: String!
+  from: User!
 }

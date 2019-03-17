@@ -1,9 +1,5 @@
-const info = () => {
-  return 'Just awessome API 👽'
-}
+export const info = () => 'Just awessome API 👽'
 
-const users = (parent, args, context) => {
-  return context.prisma.users()
-}
+export const users = (parent, args, context) => context.prisma.users()
 
-export { info, users }
+export const posts = (parent, args, context) => context.prisma.posts()
