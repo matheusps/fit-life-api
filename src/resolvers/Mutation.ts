@@ -1,11 +1,11 @@
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
-import { APP_SECRET, getUserId } from '../utils'
+import { secret, getUserId } from '../auth'
 
 export const signup = async (parent, args, context, info) => {
   const password = await bcrypt.hash(args.password, 10)
   const user = await context.prisma.createUser({ ...args, password })
-  const token = jwt.sign({ userId: user.id }, APP_SECRET)
+  const token = jwt.sign({ userId: user.id }, secret)
 
   return {
     token,
@@ -20,7 +20,7 @@ export const login = async (parent, args, context, info) => {
   const valid = await bcrypt.compare(args.password, user.password)
   if (!valid) throw new Error('🚫 Invalid password!')
 
-  const token = jwt.sign({ userId: user.id }, APP_SECRET)
+  const token = jwt.sign({ userId: user.id }, secret)
 
   return {
     token,
